@@ -24,8 +24,8 @@ else
     RM := del /f
 endif
 
-# Use system pandoc directly
-PANDOC := pandoc
+# Use system pandoc but run in uv environment to access weasyprint
+PANDOC := uv run --with-editable . pandoc
 PANDOC_OPTIONS=--defaults ./pandoc/defaults.yaml --metadata title="" --metadata author=""
 
 .PHONY: all list clean setup fonts
