@@ -13,6 +13,39 @@ The post [Generating Aviation Checklists with Make](https://danielwiese.com/post
   <img title="sample-checklist" alt="sample-checklist" width="600" src="sample/checklist.jpg">
 </p>
 
+## Prerequisites
+
+This project requires:
+- **Pandoc** - Document converter
+- **pagedjs-cli** - PDF engine for Pandoc
+
+### Installation
+
+**macOS (using Homebrew):**
+```sh
+brew install pandoc
+npm install -g pagedjs-cli
+```
+
+**Linux (Ubuntu/Debian):**
+```sh
+sudo apt-get install pandoc npm
+npm install -g pagedjs-cli
+```
+
+**Linux (RHEL/CentOS/Fedora):**
+```sh
+sudo dnf install pandoc npm  # or yum install
+npm install -g pagedjs-cli
+```
+
+**Windows:**
+```sh
+# Install Pandoc from https://pandoc.org/installing.html
+# Install Node.js from https://nodejs.org/
+npm install -g pagedjs-cli
+```
+
 ## Generating Output
 
 ```sh
@@ -24,6 +57,8 @@ make all
 
 Adding a new aircraft should be very straightforward: just copy and rename an existing aircraft directory within `src`, and modify the HTML as desired.
 When running Make, the corresponding PDF will automatically be generated.
+
+This project is cross-platform compatible and works on macOS, Linux, and Windows (with MSYS2/MinGW or WSL).
 
 Optionally, for the purposes of viewing changes to generated PDFs, consider [diff-pdf](https://vslavik.github.io/diff-pdf/).
 

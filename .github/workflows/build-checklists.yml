@@ -1,0 +1,38 @@
+name: Build Checklists
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install Pandoc
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc
+        
+    - name: Install pagedjs-cli
+      run: npm install -g pagedjs-cli
+      
+    - name: Build checklists
+      run: make all
+      
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: checklists-pdf
+        path: out/*.pdf
+        retention-days: 30
