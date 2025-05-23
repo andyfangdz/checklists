@@ -13,28 +13,15 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 8
-        
-    - name: Install Pandoc
+  
+    - name: Install Pandoc & Weasyprint
       run: |
         sudo apt-get update
-        sudo apt-get install -y pandoc
-        
-    - name: Install pagedjs-cli
-      run: pnpm add -g pagedjs-cli
-      
+        sudo apt-get install -y pandoc weasyprint
+
     - name: Build checklists
       run: make all
-      
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:

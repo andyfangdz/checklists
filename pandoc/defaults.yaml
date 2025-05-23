@@ -1,2 +1,2 @@
-pdf-engine: pagedjs-cli
+pdf-engine: weasyprint
 css: ./css/checklist.css
