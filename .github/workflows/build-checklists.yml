@@ -21,14 +21,6 @@ jobs:
         enable-cache: true
         cache-dependency-glob: "uv.lock"
 
-    - name: Cache APT packages
-      uses: actions/cache@v4
-      with:
-        path: /var/cache/apt
-        key: apt-cache-${{ runner.os }}-${{ hashFiles('**/.github/workflows/build-checklists.yml') }}
-        restore-keys: |
-          apt-cache-${{ runner.os }}-
-
     - name: Install system dependencies
       run: |
         sudo apt-get update
