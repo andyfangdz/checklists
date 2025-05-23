@@ -24,135 +24,10 @@
   margin: 1in;
 }
 
-@font-face {
-  font-family: "SF Pro";
-  font-style: normal;
-  font-weight: 100;
-  src: url(/Library/Fonts/SF-Pro-Text-Ultralight.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: normal;
-  font-weight: 200;
-  src: url(/Library/Fonts/SF-Pro-Text-Thin.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: normal;
-  font-weight: 300;
-  src: url(/Library/Fonts/SF-Pro-Text-Light.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: normal;
-  font-weight: 400;
-  src: url(/Library/Fonts/SF-Pro-Text-Regular.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: normal;
-  font-weight: 500;
-  src: url(/Library/Fonts/SF-Pro-Text-Medium.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: normal;
-  font-weight: 600;
-  src: url(/Library/Fonts/SF-Pro-Text-Semibold.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: normal;
-  font-weight: 700;
-  src: url(/Library/Fonts/SF-Pro-Text-Bold.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: normal;
-  font-weight: 800;
-  src: url(/Library/Fonts/SF-Pro-Text-Heavy.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: normal;
-  font-weight: 900;
-  src: url(/Library/Fonts/SF-Pro-Text-Black.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: italic;
-  font-weight: 100;
-  src: url(/Library/Fonts/SF-Pro-Text-UltralightItalic.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: italic;
-  font-weight: 200;
-  src: url(/Library/Fonts/SF-Pro-Text-ThinItalic.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: italic;
-  font-weight: 300;
-  src: url(/Library/Fonts/SF-Pro-Text-LightItalic.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: italic;
-  font-weight: 400;
-  src: url(/Library/Fonts/SF-Pro-Text-RegularItalic.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: italic;
-  font-weight: 500;
-  src: url(/Library/Fonts/SF-Pro-Text-MediumItalic.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: italic;
-  font-weight: 600;
-  src: url(/Library/Fonts/SF-Pro-Text-SemiboldItalic.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: italic;
-  font-weight: 700;
-  src: url(/Library/Fonts/SF-Pro-Text-BoldItalic.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: italic;
-  font-weight: 800;
-  src: url(/Library/Fonts/SF-Pro-Text-HeavyItalic.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "SF Pro";
-  font-style: italic;
-  font-weight: 900;
-  src: url(/Library/Fonts/SF-Pro-Text-BlackItalic.otf) format("opentype");
-}
-
-html, body{
-  font-family: SF Pro;
+html, body {
+  font-family: "B612", "SF Pro", -apple-system, BlinkMacSystemFont, sans-serif;
   margin: 0px;
+  font-weight: 500;
 }
 
 b {
@@ -242,6 +117,7 @@ th {
   width: 6.5in;
   height: 8.65in;
   padding: 2px;
+  break-before: page;
 }
 
 .col {
@@ -347,17 +223,18 @@ th {
 
 .item-column {
   font-size: var(--item-column-font-size);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .item-column-left {
   text-align: left;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .item-column-center {
   overflow: hidden;
   flex: 1;
+  min-width: 0;
 }
 
 .item-column-right {
