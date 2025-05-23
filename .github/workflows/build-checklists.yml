@@ -29,7 +29,7 @@ jobs:
         sudo fc-cache -fv
 
     - name: Build checklists
-      run: make all -j4
+      run: make all
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
