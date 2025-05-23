@@ -15,35 +15,53 @@ The post [Generating Aviation Checklists with Make](https://danielwiese.com/post
 
 ## Prerequisites
 
-This project requires:
+This project uses [uv](https://docs.astral.sh/uv/) for Python dependency management and requires:
+- **uv** - Python package and project manager
 - **Pandoc** - Document converter
-- **pagedjs-cli** - PDF engine for Pandoc
 
 ### Installation
+
+**Install uv:**
+```sh
+# macOS and Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Or using Homebrew (macOS)
+brew install uv
+
+# Or using pip
+pip install uv
+```
+
+**Install Pandoc:**
 
 **macOS (using Homebrew):**
 ```sh
 brew install pandoc
-npm install -g pagedjs-cli
 ```
 
 **Linux (Ubuntu/Debian):**
 ```sh
-sudo apt-get install pandoc npm
-npm install -g pagedjs-cli
+sudo apt-get install pandoc
 ```
 
 **Linux (RHEL/CentOS/Fedora):**
 ```sh
-sudo dnf install pandoc npm  # or yum install
-npm install -g pagedjs-cli
+sudo dnf install pandoc  # or yum install
 ```
 
 **Windows:**
 ```sh
 # Install Pandoc from https://pandoc.org/installing.html
-# Install Node.js from https://nodejs.org/
-npm install -g pagedjs-cli
+```
+
+### Setup Dependencies
+
+After installing uv and Pandoc, set up the Python dependencies:
+
+```sh
+# Install Python dependencies (weasyprint) using uv
+uv sync
 ```
 
 ## Generating Output

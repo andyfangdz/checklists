@@ -14,12 +14,17 @@ jobs:
     steps:
     - uses: actions/checkout@v4
   
-    - name: Install Pandoc & Weasyprint
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
+      with:
+        version: "latest"
+
+    - name: Install Pandoc
       run: |
         sudo apt-get update
-        sudo apt-get install -y pandoc weasyprint
+        sudo apt-get install -y pandoc
 
-    - uses: fontist/setup-fontist@v2
+    - uses: Lukas-Strutz/setup-fontist@aa07c5e
 
     - run: fontist install "B612"
 
@@ -27,6 +32,9 @@ jobs:
       run: |
         sudo cp -r ~/.fontist/fonts/* /usr/share/fonts/ || true
         sudo fc-cache -fv
+
+    - name: Install dependencies with uv
+      run: uv sync
 
     - name: Build checklists
       run: make all
