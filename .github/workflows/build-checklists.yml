@@ -18,20 +18,27 @@ jobs:
       uses: astral-sh/setup-uv@v4
       with:
         version: "latest"
+        enable-cache: true
+        cache-dependency-glob: "uv.lock"
 
-    - name: Install Pandoc
+    - name: Cache B612 Font
+      uses: actions/cache@v4
+      id: font-cache
+      with:
+        path: /usr/share/fonts/b612
+        key: b612-font-v1
+
+    - name: Install B612 Font from Google Fonts
+      if: steps.font-cache.outputs.cache-hit != 'true'
       run: |
-        sudo apt-get update
-        sudo apt-get install -y pandoc
-
-    - uses: Lukas-Strutz/setup-fontist@aa07c5e0716ec078742249828feb0e9161a178b7
-
-    - run: fontist install "B612"
-
-    - name: Make fonts available to weasyprint
-      run: |
-        sudo cp -r ~/.fontist/fonts/* /usr/share/fonts/ || true
+        wget -O B612.zip https://fonts.google.com/download?family=B612
+        unzip -d b612/ B612.zip
+        sudo mv b612 /usr/share/fonts/
         sudo fc-cache -fv
+
+    - name: Refresh font cache if cached
+      if: steps.font-cache.outputs.cache-hit == 'true'
+      run: sudo fc-cache -fv
 
     - name: Install dependencies with uv
       run: uv sync
