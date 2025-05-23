@@ -19,8 +19,12 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y pandoc weasyprint
 
+    - uses: fontist/setup-fontist@v2
+
+    - run: fontist install "B612"
+
     - name: Build checklists
-      run: make all
+      run: make all -j4
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
