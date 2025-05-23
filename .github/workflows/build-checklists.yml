@@ -19,13 +19,18 @@ jobs:
       with:
         node-version: '18'
         
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 8
+        
     - name: Install Pandoc
       run: |
         sudo apt-get update
         sudo apt-get install -y pandoc
         
     - name: Install pagedjs-cli
-      run: npm install -g pagedjs-cli
+      run: pnpm add -g pagedjs-cli
       
     - name: Build checklists
       run: make all
