@@ -23,6 +23,11 @@ jobs:
 
     - run: fontist install "B612"
 
+    - name: Make fonts available to weasyprint
+      run: |
+        sudo cp -r ~/.fontist/fonts/* /usr/share/fonts/ || true
+        sudo fc-cache -fv
+
     - name: Build checklists
       run: make all -j4
 
