@@ -5,7 +5,6 @@ description = "Aviation checklists generator"
 requires-python = ">=3.9"
 dependencies = [
     "weasyprint>=62.0",
-    "pypandoc-binary>=1.13",
 ]
 
 [build-system]

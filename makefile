@@ -24,8 +24,8 @@ else
     RM := del /f
 endif
 
-# Use system pandoc but ensure weasyprint is available through uv
-PANDOC := uv run pandoc
+# Use system pandoc directly
+PANDOC := pandoc
 PANDOC_OPTIONS=--defaults ./pandoc/defaults.yaml --metadata title="" --metadata author=""
 
 .PHONY: all list clean setup fonts
@@ -54,7 +54,7 @@ list:
 .SECONDEXPANSION:
 $(OUT)/%.pdf: $(CWD)/css/checklist.css $$(wildcard $(SRC)/%/*.html) | $(OUT)
 	@echo $@
-	@uv run $(PANDOC) $(PANDOC_OPTIONS) $(filter-out $<,$^) -o $@
+	@$(PANDOC) $(PANDOC_OPTIONS) $(filter-out $<,$^) -o $@
 
 $(OUT):
 ifeq ($(UNAME_S),$(filter $(UNAME_S),MINGW32 MINGW64 MSYS CYGWIN))
