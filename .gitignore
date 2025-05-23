@@ -1,5 +1,6 @@
 .DS_Store
 out/*
+fonts/*
 
 # Python virtual environment
 .venv/

@@ -21,24 +21,17 @@ jobs:
         enable-cache: true
         cache-dependency-glob: "uv.lock"
 
-    - name: Cache B612 Font
+    - name: Cache Fonts
       uses: actions/cache@v4
       id: font-cache
       with:
-        path: /usr/share/fonts/b612
-        key: b612-font-v1
+        path: fonts/
+        key: fonts-${{ hashFiles('scripts/download_fonts.py') }}
 
-    - name: Install B612 Font from Google Fonts
+    - name: Download fonts
       if: steps.font-cache.outputs.cache-hit != 'true'
       run: |
-        wget -O B612.zip https://fonts.google.com/download?family=B612
-        unzip -d b612/ B612.zip
-        sudo mv b612 /usr/share/fonts/
-        sudo fc-cache -fv
-
-    - name: Refresh font cache if cached
-      if: steps.font-cache.outputs.cache-hit == 'true'
-      run: sudo fc-cache -fv
+        uv run python scripts/download_fonts.py
 
     - name: Install dependencies with uv
       run: uv sync

@@ -2,10 +2,14 @@
 CWD := $(abspath $(shell pwd))
 SRC := $(CWD)/src
 OUT := $(CWD)/out
+FONTS := $(CWD)/fonts
 SRC_DIRS := $(filter-out $(SRC)/checklists.egg-info, $(wildcard $(SRC)/*))
 
 # Define one output file name for each directory in src
 TARGETS := $(addsuffix .pdf, $(patsubst $(SRC)/%,$(OUT)/%,$(SRC_DIRS)))
+
+# Font files
+FONT_FILES := $(FONTS)/B612-Regular.ttf $(FONTS)/B612-Bold.ttf $(FONTS)/B612-Italic.ttf $(FONTS)/B612-BoldItalic.ttf
 
 # Detect OS and set appropriate paths
 UNAME_S := $(shell uname -s)
@@ -21,18 +25,28 @@ else
 endif
 
 # Use system pandoc but ensure weasyprint is available through uv
-PANDOC := pandoc
+PANDOC := uv run pandoc
 PANDOC_OPTIONS=--defaults ./pandoc/defaults.yaml --metadata title="" --metadata author=""
 
-.PHONY: all list clean setup
-.SILENT: all list clean setup
+.PHONY: all list clean setup fonts
+.SILENT: all list clean setup fonts
 
 # Ensure dependencies are installed
 setup:
 	@echo "Installing dependencies with uv..."
 	@uv sync
 
-all: setup $(TARGETS)
+# Download fonts
+fonts: $(FONT_FILES)
+
+$(FONT_FILES): | $(FONTS)
+	@echo "Downloading fonts..."
+	@uv run python scripts/download_fonts.py
+
+$(FONTS):
+	@mkdir -p $@
+
+all: setup fonts $(TARGETS)
 
 list:
 	@echo $(TARGETS)
