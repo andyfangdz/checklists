@@ -31,9 +31,20 @@ jobs:
     - name: Build checklists
       run: make all
 
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v4
+    - name: Create or update nightly release
+      if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+      uses: softprops/action-gh-release@v2
       with:
-        name: checklists-pdf
-        path: out/*.pdf
-        retention-days: 30
+        tag_name: nightly
+        name: "Latest Build"
+        body: |
+          Automatically generated checklists from the latest main branch.
+          
+          Generated on: ${{ github.event.head_commit.timestamp || github.run_id }}
+          Commit: ${{ github.sha }}
+        prerelease: false
+        files: |
+          out/*.pdf
+        fail_on_unmatched_files: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
